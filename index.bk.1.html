@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indu, My Moon</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            display: none; /* Hide content until password is entered */
+        }
+        canvas {
+            display: block;
+        }
+        .moon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: url('moon.png') no-repeat center/cover;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        .indu-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: url('indu_aaya.jpg') no-repeat center/cover;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
+    </style>
+    <script>
+        // Prompt for a password before displaying the page
+        function checkPassword() {
+            const correctPassword = "quack"; // Set your password here
+            const userPassword = prompt("Our favourite animal's sound:");
+
+            if (userPassword === correctPassword) {
+                document.body.style.display = "block"; // Show content
+            } else {
+                alert("Incorrect password! Try again.");
+                checkPassword(); // Ask again if incorrect
+            }
+        }
+    </script>
+</head>
+<body onload="checkPassword()">
+    <canvas id="starsCanvas"></canvas>
+    <div class="moon">
+        <div class="indu-image"></div>
+    </div>
+    <script>
+        const canvas = document.getElementById("starsCanvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let stars = [];
+        for (let i = 0; i < 100; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2,
+                alpha: Math.random()
+            });
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            stars.forEach(star => {
+                ctx.globalAlpha = star.alpha;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+    </script>
+</body>
+</html>
