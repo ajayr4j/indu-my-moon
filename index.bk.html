@@ -9,62 +9,66 @@
             margin: 0;
             overflow: hidden;
             background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            display: none; /* Hide content until password is entered */
+            text-align: center;
+            color: white;
+            font-family: 'Arial', sans-serif;
         }
         canvas {
             display: block;
+        }
+        .quote {
             position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .scene {
-            perspective: 1000px;
-        }
-        .moon-container {
-            width: 200px;
-            height: 200px;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease-out;
-            position: relative;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
         }
         .moon {
-            width: 200px;
-            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
             background: url('moon.png') no-repeat center/cover;
             border-radius: 50%;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-            position: absolute;
-            transform: translateZ(0px);
         }
-        .image {
-            width: 80px;
-            height: 80px;
-            background-size: cover;
+        .indu-image {
             position: absolute;
-            border-radius: 10px;
-            transform: translate(-50%, -50%) translateZ(50px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: url('indu_aaya.jpg') no-repeat center/cover;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
         }
-        .image:nth-child(2) { top: 10%; left: 50%; background: url('img1.jpg') no-repeat center/cover; }
-        .image:nth-child(3) { top: 50%; left: 10%; background: url('img2.jpg') no-repeat center/cover; }
-        .image:nth-child(4) { top: 50%; left: 90%; background: url('img3.jpg') no-repeat center/cover; }
-        .image:nth-child(5) { top: 80%; left: 50%; background: url('img4.jpg') no-repeat center/cover; }
-        .image:nth-child(6) { top: 30%; left: 70%; background: url('img5.jpg') no-repeat center/cover; }
     </style>
+    <script>
+        // Prompt for a password before displaying the page
+        function checkPassword() {
+            const correctPassword = "quack"; // Set your password here
+            const userPassword = prompt("Our favourite animal's sound:");
+
+            if (userPassword === correctPassword) {
+                document.body.style.display = "block"; // Show content
+            } else {
+                alert("Incorrect password! Try again.");
+                checkPassword(); // Ask again if incorrect
+            }
+        }
+    </script>
 </head>
-<body>
+<body onload="checkPassword()">
     <canvas id="starsCanvas"></canvas>
-    <div class="scene">
-        <div class="moon-container" id="moon-container">
-            <div class="moon"></div>
-            <div class="image"></div>
-            <div class="image"></div>
-            <div class="image"></div>
-            <div class="image"></div>
-            <div class="image"></div>
-        </div>
+    <div class="quote">ஒரு நிலா இரண்டு ஆனதே,<br>எனக்கு மட்டுமே!<br>ஒன்று இரவின் பாதியில் மறைந்துவிடும்,<br>மற்றொன்று வாழ்நாளெலாம் மின்னிடும்!</div>
+    <div class="moon">
+        <div class="indu-image"></div>
     </div>
     <script>
         const canvas = document.getElementById("starsCanvas");
@@ -95,29 +99,6 @@
             requestAnimationFrame(drawStars);
         }
         drawStars();
-
-        const moonContainer = document.getElementById("moon-container");
-        let isMouseDown = false;
-        let lastX, lastY;
-        
-        moonContainer.addEventListener("mousedown", (event) => {
-            isMouseDown = true;
-            lastX = event.clientX;
-            lastY = event.clientY;
-        });
-        
-        document.addEventListener("mousemove", (event) => {
-            if (!isMouseDown) return;
-            let deltaX = event.clientX - lastX;
-            let deltaY = event.clientY - lastY;
-            moonContainer.style.transform = `rotateY(${deltaX * 0.5}deg) rotateX(${deltaY * -0.5}deg)`;
-        });
-        
-        document.addEventListener("mouseup", () => {
-            isMouseDown = false;
-        });
     </script>
 </body>
 </html>
-
-
