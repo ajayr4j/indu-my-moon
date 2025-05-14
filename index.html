@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,17 @@
             margin: 0;
             overflow: hidden;
             background: black;
-            display: none; /* Hide content until password is entered */
+            display: none;
+            /* Hide content until password is entered */
             text-align: center;
             color: white;
             font-family: 'Arial', sans-serif;
         }
+
         canvas {
             display: block;
         }
+
         .container {
             position: absolute;
             top: 50%;
@@ -26,6 +30,7 @@
             flex-direction: column;
             align-items: center;
         }
+
         .quote {
             font-size: 18px;
             font-weight: bold;
@@ -33,6 +38,7 @@
             white-space: nowrap;
             margin-bottom: 20px;
         }
+
         .moon {
             width: 300px;
             height: 300px;
@@ -43,15 +49,15 @@
             justify-content: center;
             align-items: center;
         }
+
         .indu-image {
             width: 150px;
-            height: 150px;
-            background: url('indu_aaya.png') no-repeat center/cover;
-            
-        }
+            height: 250px;
+            background: url('indu_ss.png') no-repeat center/cover;
 
+        }
     </style>
-    
+
     <script>
         // Prompt for a password before displaying the page
         function checkPassword() {
@@ -67,10 +73,24 @@
         }
     </script>
 </head>
+
 <body onload="checkPassword()">
     <canvas id="starsCanvas"></canvas>
     <div class="container">
-        <div class="quote">ஒரு நிலா இரண்டு ஆனதே,<br>எனக்கு மட்டுமே!<br>ஒன்று இரவின் பாதியில் மறைந்துவிடும்,<br>மற்றொன்று என்றும் எனக்கே தோன்றிடும்!</div>
+        <div class="quote">
+            ஒரு நிலா இரண்டு ஆனதே,<br>
+            எனக்கு மட்டுமே!<br>
+            ஒன்று இரவின் பாதியில் மறைந்துவிடும்,<br>
+            மற்றொன்று என்றும் எனக்கே தோன்றிடும்! <small>– Feb 13, 2025</small>
+            
+        </div>
+        <div class="quote">
+            நீ ஒரு நிலா என்று நினைத்தேன்…<br>
+            ஆனா இப்படி ப்ளூட்டோ மாதிரி,<br>
+            இருக்குற இடம் தெரியாம,<br>
+            ஆவணு நினைக்கல! <small> – May 14, 2025</small>
+            
+        </div>
         <div class="moon">
             <div class="indu-image"></div>
         </div>
@@ -106,4 +126,5 @@
         drawStars();
     </script>
 </body>
+
 </html>
